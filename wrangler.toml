@@ -1,2 +1,5 @@
 name = "koibridge-homepage"
-pages_build_output_dir = "."
+compatibility_date = "2026-07-09"
+
+[assets]
+directory = "."

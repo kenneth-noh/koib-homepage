@@ -945,6 +945,22 @@
       document.body.style.fontFamily =
         "-apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic UI', Meiryo, sans-serif";
 
+      // Fix: word-break:keep-all은 한국어 전용 — 일본어는 normal로 재정의
+      const jaStyle = document.createElement('style');
+      jaStyle.textContent = `
+        .hero-text h1, .hero-text > p,
+        .block-text h2, .block-text p,
+        .sec-title, .sec-sub,
+        .step h3, .step p,
+        .feat-card h3, .feat-card p,
+        .cta h2, .cta > p {
+          word-break: normal;
+          overflow-wrap: anywhere;
+          line-break: strict;
+        }
+      `;
+      document.head.appendChild(jaStyle);
+
       const $  = s => document.querySelector(s);
       const $$ = s => [...document.querySelectorAll(s)];
 

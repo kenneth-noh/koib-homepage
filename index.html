@@ -787,7 +787,7 @@
         <div class="block-text fade">
           <div class="feature-tag">Gift</div>
           <h2>마음을 담은<br>특별한 선물</h2>
-          <p>앱 내 코인으로 상대에게 선물을 보내보세요.<br>
+          <p>앱 내 민트로 상대에게 선물을 보내보세요.<br>
              말로 표현하기 어려운 감정을,<br>
              선물 하나로 특별하게 전달할 수 있습니다.</p>
         </div>
@@ -933,7 +933,8 @@
     // ── Japanese localisation ──
     (function () {
       const primaryLang = (navigator.languages?.[0] || navigator.language || '').toLowerCase();
-      if (!primaryLang.startsWith('ja')) return;
+      const forceLang = new URLSearchParams(location.search).get('lang');
+      if (!primaryLang.startsWith('ja') && forceLang !== 'ja' && forceLang !== 'jp') return;
 
       document.documentElement.lang = 'ja';
       document.title = 'KoiBridge - 世界をつなぐ特別な出会い';
@@ -985,7 +986,7 @@
         },
         {
           h2: '気持ちを込めた<br>特別なプレゼント',
-          p:  'アプリ内コインで相手にプレゼントを贈りましょう。<br>' +
+          p:  'アプリ内ミントで相手にプレゼントを贈りましょう。<br>' +
               '言葉では表しにくい気持ちを、<br>' +
               'プレゼント一つで特別に伝えることができます。'
         },

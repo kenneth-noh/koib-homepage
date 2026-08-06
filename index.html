@@ -916,11 +916,12 @@
   </footer>
 
   <script>
+    // ── Scroll animations ──
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
     }, { threshold: 0.12 });
 
-    document.querySelectorAll('.fade').forEach((el, i) => {
+    document.querySelectorAll('.fade').forEach((el) => {
       const grid = el.closest('.feature-grid');
       if (grid) {
         const idx = [...grid.children].indexOf(el);
@@ -928,6 +929,153 @@
       }
       observer.observe(el);
     });
+
+    // ── Japanese localisation ──
+    (function () {
+      const langs = navigator.languages || [navigator.language || ''];
+      if (!langs.some(l => l.toLowerCase().startsWith('ja'))) return;
+
+      document.documentElement.lang = 'ja';
+      document.title = 'KoiBridge - 世界をつなぐ特別な出会い';
+      document.querySelector('meta[name="description"]')
+        .setAttribute('content', 'KoiBridgeで新しい出会いを見つけましょう。マッチングなしですぐに会話、音声通話、プレゼントまで。');
+
+      // Japanese-optimised font stack
+      document.body.style.fontFamily =
+        "-apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Yu Gothic UI', Meiryo, sans-serif";
+
+      const $  = s => document.querySelector(s);
+      const $$ = s => [...document.querySelectorAll(s)];
+
+      /* ── Hero ── */
+      $('.hero-badge').innerHTML = '🇰🇷 韓国人の友達と始まるグローバルAI言語交換';
+      $('.hero-text h1').innerHTML = '韓国人の友達と<br>ときめく<em>会話</em>';
+      $('.hero-text > p').innerHTML =
+        '韓国人の友達とチャットしながら自然に韓国語を学びましょう。<br>' +
+        'AI翻訳がすべての言語の壁を取り除いてくれます。<br>' +
+        '今オンライン中の友達とすぐに会話を始めてみてください。';
+
+      /* ── Stats ── */
+      const sn = $$('.stat-num');
+      const sl = $$('.stat-label');
+      if (sn[0]) sn[0].textContent = '30カ国以上';
+      if (sl[0]) sl[0].textContent = '対応国数';
+      if (sl[1]) sl[1].textContent = 'ユーザー満足度';
+      if (sl[2]) sl[2].textContent = 'リアルタイム監視';
+
+      /* ── Feature blocks ── */
+      const blockData = [
+        {
+          h2: '今オンライン中の<br>韓国人の友達を見つけよう',
+          p:  'リアルタイムでオンライン中の韓国人の友達にすぐ会いましょう。<br>' +
+              '人気順・新着順フィルターで自分に合った友達を見つけて、<br>' +
+              '最初の会話を無料で始めることができます。'
+        },
+        {
+          h2: 'マッチングなしで<br>すぐに会話スタート',
+          p:  '複雑なマッチングプロセスなしですぐに会話を始めましょう。<br>' +
+              'AIリアルタイム翻訳が言語の差を解消してくれるので、<br>' +
+              '韓国語がわからなくても自然な会話が可能です。'
+        },
+        {
+          h2: '声でもっと<br>近づく',
+          p:  'テキストより本当の気持ちが伝わる音声メッセージ。<br>' +
+              'リアルタイム音声通話でより深い会話を楽しみましょう。<br>' +
+              '言語が違っても声は心を動かします。'
+        },
+        {
+          h2: '気持ちを込めた<br>特別なプレゼント',
+          p:  'アプリ内コインで相手にプレゼントを贈りましょう。<br>' +
+              '言葉では表しにくい気持ちを、<br>' +
+              'プレゼント一つで特別に伝えることができます。'
+        },
+        {
+          h2: '安全で<br>信頼できる空間',
+          p:  'AI写真審査・通報・ブロック機能で<br>' +
+              '健全なコミュニティを維持します。<br>' +
+              '24時間監視で不快な経験なく<br>' +
+              '安心してご利用ください。'
+        },
+      ];
+      $$('.block').forEach((block, i) => {
+        if (!blockData[i]) return;
+        block.querySelector('h2').innerHTML = blockData[i].h2;
+        block.querySelector('p').innerHTML  = blockData[i].p;
+      });
+
+      /* ── How it works ── */
+      const darkCont = $('.section-dark .container');
+      darkCont.querySelector('.sec-title').textContent = '始め方';
+      darkCont.querySelector('.sec-sub').textContent   = '4ステップで新しい出会いを見つけましょう';
+
+      const stepData = [
+        { h3: 'アプリをダウンロード', p: 'App StoreまたはGoogle Playから<br>無料でダウンロード' },
+        { h3: 'プロフィール作成',     p: '自分を表す写真と<br>紹介を登録しましょう' },
+        { h3: '相手を探す',           p: 'フィルターで希望の相手を<br>見つけてお気に入りに' },
+        { h3: '会話を始める',         p: 'マッチングなしですぐに<br>メッセージを送り出会いを作りましょう' },
+      ];
+      $$('.step').forEach((step, i) => {
+        if (!stepData[i]) return;
+        step.querySelector('h3').textContent = stepData[i].h3;
+        step.querySelector('p').innerHTML    = stepData[i].p;
+      });
+
+      /* ── Feature grid ── */
+      const softCont = $('.section-soft .container');
+      softCont.querySelector('.sec-title').textContent = 'KoiBridgeのすべて';
+      softCont.querySelector('.sec-sub').textContent   = '豊富な機能でより特別なつながりを体験してください';
+
+      const cardData = [
+        { h3: '多言語翻訳',         p: '言語が違っても大丈夫。リアルタイム翻訳で自然な会話を続けましょう。' },
+        { h3: '多彩なスタンプ',     p: '感情をより豊かに表現できるスタンプで会話に楽しさをプラスしましょう。' },
+        { h3: 'プレゼントアイテム', p: '花束、指輪、特別アイテムで大切な気持ちを素敵に伝えましょう。' },
+        { h3: 'AI写真審査',         p: '人工知能が不適切な写真を自動的にフィルタリングし安全な環境を作ります。' },
+        { h3: 'リアルタイム通知',   p: '新着メッセージ、いいね、プレゼントなど見逃せない通知をすぐに受け取りましょう。' },
+      ];
+      $$('.feat-card').forEach((card, i) => {
+        if (!cardData[i]) return;
+        card.querySelector('h3').textContent = cardData[i].h3;
+        card.querySelector('p').textContent  = cardData[i].p;
+      });
+
+      /* ── CTA ── */
+      const cta = $('.cta');
+      cta.querySelector('h2').innerHTML  = '韓国人の友達と<br>会話を始めましょう';
+      cta.querySelector('p').textContent = '言語の心配なく、AI翻訳で自然に — 今すぐ始めましょう';
+
+      // CTA 버튼: SVG 유지하면서 텍스트 노드만 교체
+      const replaceTextNode = (el, newText) => {
+        for (let i = el.childNodes.length - 1; i >= 0; i--) {
+          const node = el.childNodes[i];
+          if (node.nodeType === 3 && node.textContent.trim()) {
+            node.textContent = ' ' + newText;
+            return;
+          }
+        }
+      };
+      replaceTextNode(cta.querySelector('.cta-btn-primary'), 'App Storeでダウンロード');
+      replaceTextNode(cta.querySelector('.cta-btn-ghost'),   'Google Playでダウンロード');
+
+      /* ── Footer ── */
+      const footerLinkTexts = ['利用規約', 'プライバシーポリシー', '青少年保護方針'];
+      $$('.footer-links a').forEach((a, i) => {
+        if (footerLinkTexts[i]) a.textContent = footerLinkTexts[i];
+      });
+
+      $('.footer-info').innerHTML =
+        'PrismNexus Inc. | 代表取締役：Noh Jung-ho<br>' +
+        '通信販売業届出番号：2026-ソウル江南-00395 | 事業者登録番号：468-86-04093<br>' +
+        'カスタマーサポート：cs@pnexusai.com<br>' +
+        'ソウル特別市江南区江南大路112ギル47, 2F 634A号（論峴洞）';
+
+      /* ── Images: _jp 버전으로 교체 (logo.png 제외) ── */
+      $$('img').forEach(img => {
+        const src = img.getAttribute('src') || '';
+        if (src && !src.endsWith('logo.png')) {
+          img.setAttribute('src', src.replace(/(\.[^./]+)$/, '_jp$1'));
+        }
+      });
+    })();
   </script>
 </body>
 </html>

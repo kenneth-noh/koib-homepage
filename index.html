@@ -948,15 +948,18 @@
       // Fix: word-break:keep-all은 한국어 전용 — 일본어는 normal로 재정의
       const jaStyle = document.createElement('style');
       jaStyle.textContent = `
+        html { overflow-x: hidden; }
         .hero-text h1, .hero-text > p,
         .block-text h2, .block-text p,
         .sec-title, .sec-sub,
-        .step h3, .step p,
-        .feat-card h3, .feat-card p,
         .cta h2, .cta > p {
           word-break: normal;
-          overflow-wrap: anywhere;
-          line-break: strict;
+          overflow-wrap: break-word;
+        }
+        .step h3, .step p,
+        .feat-card h3, .feat-card p {
+          word-break: break-all;
+          overflow-wrap: break-word;
         }
       `;
       document.head.appendChild(jaStyle);
@@ -1026,7 +1029,7 @@
       darkCont.querySelector('.sec-sub').textContent   = '4ステップで新しい出会いを見つけましょう';
 
       const stepData = [
-        { h3: 'アプリをダウンロード', p: 'App StoreまたはGoogle Playから<br>無料でダウンロード' },
+        { h3: 'アプリをダウンロード', p: 'App Store・Google Play<br>から無料でダウンロード' },
         { h3: 'プロフィール作成',     p: '自分を表す写真と<br>紹介を登録しましょう' },
         { h3: '相手を探す',           p: 'フィルターで希望の相手を<br>見つけてお気に入りに' },
         { h3: '会話を始める',         p: 'マッチングなしですぐに<br>メッセージを送り出会いを作りましょう' },

@@ -932,11 +932,8 @@
 
     // ── Japanese localisation ──
     (function () {
-      const langs = navigator.languages || [navigator.language || ''];
-      const forceLang = new URLSearchParams(location.search).get('lang');
-      const isJa = forceLang === 'jp' || forceLang === 'ja'
-                || langs.some(l => l.toLowerCase().startsWith('ja'));
-      if (!isJa) return;
+      const primaryLang = (navigator.languages?.[0] || navigator.language || '').toLowerCase();
+      if (!primaryLang.startsWith('ja')) return;
 
       document.documentElement.lang = 'ja';
       document.title = 'KoiBridge - 世界をつなぐ特別な出会い';
